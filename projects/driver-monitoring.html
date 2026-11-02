@@ -16,7 +16,7 @@
 
   <div class="narrow">
     <div class="case-head">
-      <div class="kicker">01 · personal project · october 2026</div>
+      <div class="kicker">03 · personal project · october 2026</div>
       <h1>Testing a driver monitor the way a car maker would</h1>
       <p class="lede">New cars in Europe must watch the driver. Euro NCAP's rule is simple: eyes closed for 3&nbsp;s means
         "asleep", and the warning has to come within 0.2&nbsp;s of that moment. I built a monitor from open tools and spent
@@ -31,9 +31,9 @@
   </div>
 
   <figure class="shot">
-    <img src="https://raw.githubusercontent.com/HarishDeepak/driver-attention-bench/main/results/demo_live_phone.gif" alt="Live phone-camera test: eyes closed, looking down, head turned; warnings fire" loading="lazy">
-    <figcaption>Live phone camera. Green/red is the system's decision per frame, yellow is the truth, labelled by hand
-      without seeing the output. 4 of 4 warnings on time, 0 false alerts. One take, so a demo, not a statistic.</figcaption>
+    <img src="https://raw.githubusercontent.com/HarishDeepak/driver-attention-bench/main/results/demo_synthetic_sleep.gif" alt="Rendered synthetic driver closing their eyes; sleep warning fires" loading="lazy">
+    <figcaption>A rendered driver (Blender) with exact labels, used to check the pipeline where the truth is perfect:
+      15 of 18 warnings on time, 0 false alerts. The misses are eyes behind dark sunglasses, reported as "unknown" on purpose.</figcaption>
   </figure>
 
   <div class="narrow prose">
@@ -86,7 +86,7 @@
     </ul>
   </div>
 
-  <div class="next"><a href="../">← all work</a><a href="pragmabot-fr3.html">next: PragmaBot on an FR3 →</a></div>
+  <div class="next"><a href="cube-stacking.html">← cube stacking</a><a href="diffusion-policy.html">next: diffusion policy →</a></div>
 </main>
 </body>
 </html>
