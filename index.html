@@ -13,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2326231e'/%3E%3Cpath d='M4 3h2v4h4V3h2v10h-2V9H6v4H4z' fill='%23f3eee3'/%3E%3Ccircle cx='13' cy='3' r='1.6' fill='%231f6b5e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght,400;0,600;1,400&family=JetBrains+Mono:wght;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,9 +22,63 @@
   <p class="role">Robot perception &amp; manipulation · M.Sc. student, TU Darmstadt</p>
 
   <div class="intro">
-    <p>I work on robot arms that have to find an object, plan a grasp and actually pick it up, mostly on real Franka robots with ROS&nbsp;2 and MoveIt&nbsp;2.</p>
+    <p>I'm Harish, an M.Sc. student at <a class="u" href="https://www.tu-darmstadt.de/">TU Darmstadt</a> working on robot arms
+      that have to find an object, plan a grasp and actually pick it up, mostly on real Franka robots with ROS&nbsp;2 and MoveIt&nbsp;2.</p>
     <p>The testing matters to me as much as the demo, so the results below include the ones that didn't go up.</p>
+    <p>Say hi at <a class="u" href="mailto:harish.deepak.c@gmail.com">harish.deepak.c@gmail.com</a>, or find me on
+      <a class="u" href="https://github.com/HarishDeepak">GitHub</a> and <a class="u" href="https://linkedin.com/in/harish-deepak">LinkedIn</a>.</p>
   </div>
+
+  <h2 class="sec">// projects</h2>
+  <div class="cards">
+    <a class="card" href="projects/driver-monitoring.html">
+      <div class="thumb"><img src="https://raw.githubusercontent.com/HarishDeepak/driver-attention-bench/main/results/demo_live_phone.gif" alt="Live phone-camera test with warnings firing" loading="lazy"></div>
+      <div class="row"><span class="ct">Driver monitoring test bench</span><span class="when">2026</span></div>
+      <p>A camera driver monitor scored against Euro NCAP timing rules, then wired into CARLA.</p>
+      <p class="res">on-time warnings <b>7/66 → 22/49</b>, mostly by fixing the test</p>
+    </a>
+    <a class="card" href="projects/pragmabot-fr3.html">
+      <div class="thumb">
+        <svg viewBox="0 0 320 200" role="img" aria-label="Plan, act, verify, reflect loop">
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="currentColor" text-anchor="middle">
+            <circle cx="160" cy="100" r="62" fill="none" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 4"/>
+            <circle cx="160" cy="38" r="5" fill="var(--accent)"/><text x="160" y="24">plan</text>
+            <circle cx="222" cy="100" r="5" fill="var(--accent)"/><text x="252" y="104">act</text>
+            <circle cx="160" cy="162" r="5" fill="var(--accent)"/><text x="160" y="184">verify</text>
+            <circle cx="98" cy="100" r="5" fill="var(--accent)"/><text x="62" y="104">reflect</text>
+            <text x="160" y="97" fill="var(--muted)">frozen VLM</text><text x="160" y="112" fill="var(--muted)">+ memory</text>
+          </g>
+        </svg>
+      </div>
+      <div class="row"><span class="ct">PragmaBot on a Franka FR3</span><span class="when">2026</span></div>
+      <p>A vision-language planner that learns from its failures through memory, put on a real arm.</p>
+      <p class="res">depth artefacts <b>17.7 → 7.3 cm</b> · recovery <b>3/5</b> runs</p>
+    </a>
+    <a class="card" href="projects/cube-stacking.html">
+      <div class="thumb"><img src="https://raw.githubusercontent.com/HarishDeepak/irobman_project/main/media/stacking_demo.gif" alt="The robot stacking six cubes" loading="lazy"></div>
+      <div class="row"><span class="ct">Cube stacking, then ROS&nbsp;2</span><span class="when">2025–26</span></div>
+      <p>Text-prompted segmentation and MoveIt stack six cubes on a real Panda; later ported to ROS&nbsp;2 Humble.</p>
+      <p class="res"><b>6-cube</b> tower on hardware</p>
+    </a>
+    <a class="card" href="projects/diffusion-policy.html">
+      <div class="thumb light"><img src="https://raw.githubusercontent.com/HarishDeepak/Diffusion_Policy_Fine-Tuning_with_LoRA/master/rollout.gif" alt="PushT rollout" loading="lazy" class="contain"></div>
+      <div class="row"><span class="ct">Diffusion policy + LoRA</span><span class="when">2026</span></div>
+      <p>LeRobot on PushT: an eval harness, two silent bugs fixed, LoRA fine-tuning.</p>
+      <p class="res">success <b>5/10 → 5/10</b>, and it says so</p>
+    </a>
+  </div>
+
+  <h2 class="sec">// more projects</h2>
+  <ul class="items">
+    <li><span class="t">Open-vocabulary aerial segmentation</span>
+      <div class="d">Three text-prompted methods compared on ISPRS Potsdam with Fraunhofer IGD; SegEarth-OV3 (SAM&nbsp;3) reached 70.6% mIoU zero-shot on six tiles.</div></li>
+    <li><a class="t" href="https://github.com/HarishDeepak/cyclist-painpoints">cyclist-painpoints ↗</a>
+      <div class="d">Fast, unprotected roads ranked from OpenStreetMap data, checked in QGIS.</div></li>
+    <li><a class="t" href="https://github.com/HarishDeepak/opcua-mqtt-bridge">opcua-mqtt-bridge ↗</a>
+      <div class="d">OPC UA / Modbus to MQTT with store-and-forward, tested by killing the broker.</div></li>
+    <li><a class="t" href="https://arxiv.org/abs/2405.17449">Temple inscription OCR ↗</a>
+      <div class="d">Image-based character recognition for ancient Tamil inscriptions, arXiv preprint 2024.</div></li>
+  </ul>
 
   <h2 class="sec">// now <small>nov 2026</small></h2>
   <ul class="items">
@@ -36,7 +90,7 @@
       <div class="d">nov – dec 2026 · always up for joining a robotics team</div></li>
   </ul>
 
-  <h2 class="sec">// experience <small>labs &amp; internships</small></h2>
+  <h2 class="sec">// experience</h2>
   <ul class="timeline">
     <li class="now">
       <div class="row"><b>Student Research Assistant (HiWi)</b><span class="when">starting now</span></div>
@@ -60,7 +114,6 @@
     <li>
       <div class="row"><b>Data Science Intern</b><span class="when">apr 2023 – oct 2023</span></div>
       <i>Experiences Digital, India</i>
-      <span class="note">7 months</span>
     </li>
   </ul>
 
@@ -72,67 +125,7 @@
       <div class="d">B.Tech Electronics &amp; Communication Engineering</div></li>
   </ul>
 
-  <h2 class="sec">// projects <small>click to open</small></h2>
-
-  <details>
-    <summary><div class="row"><span class="t">Driver monitoring test bench</span><span class="when">oct 2026</span></div>
-      <span class="d">A camera-based driver monitor, tested against Euro NCAP's warning-timing rules and wired into CARLA.</span></summary>
-    <div class="open">
-      <img src="https://raw.githubusercontent.com/HarishDeepak/driver-attention-bench/main/results/demo_live_phone.gif" alt="Live phone-camera test with warnings firing" loading="lazy">
-      <p class="res">on-time warnings on real drivers went from <b>7/66</b> to <b>22/49</b>, mostly by fixing the test rather than the detector. Foundation models (DINOv2, CLIP) matched a simple eyelid measure but didn't beat it.</p>
-      <div class="links"><a href="projects/driver-monitoring.html">case study →</a><a href="https://github.com/HarishDeepak/driver-attention-bench">code →</a></div>
-    </div>
-  </details>
-
-  <details>
-    <summary><div class="row"><span class="t">PragmaBot on a Franka FR3</span><span class="when">2026</span></div>
-      <span class="d">A frozen vision-language model that plans, checks its work and learns from failures through memory, on a real arm.</span></summary>
-    <div class="open">
-      <p class="res">The paper's code stops at planning; this added segmentation, grasp synthesis and a ROS&nbsp;2 skill layer.
-        Stereo depth artefacts cut from <b>17.7</b> to <b>7.3 cm</b>; with short-term memory the robot recovered from a failed plan in <b>3/5</b> runs.</p>
-      <div class="links"><a href="projects/pragmabot-fr3.html">case study →</a><a href="https://github.com/HarishDeepak/irm2pragmabot">code →</a></div>
-    </div>
-  </details>
-
-  <details>
-    <summary><div class="row"><span class="t">Cube stacking on a Franka Panda, then ROS&nbsp;2</span><span class="when">2025 – 26</span></div>
-      <span class="d">Text-prompted segmentation, cubes fitted in 3D, MoveIt stacks a six-cube tower. Later ported to ROS 2 Humble.</span></summary>
-    <div class="open">
-      <img src="https://raw.githubusercontent.com/HarishDeepak/irobman_project/main/media/stacking_demo.gif" alt="The robot stacking six cubes" loading="lazy">
-      <p class="res">Six-cube tower on the real robot. The ROS&nbsp;2 port runs simulation, control and planning; perception and stacking are ported but not wired together yet.</p>
-      <div class="links"><a href="projects/cube-stacking.html">case study →</a><a href="https://github.com/HarishDeepak/irobman_project">code →</a><a href="https://github.com/HarishDeepak/IRM-ROS2-Port">ros 2 port →</a></div>
-    </div>
-  </details>
-
-  <details>
-    <summary><div class="row"><span class="t">Diffusion policy + LoRA</span><span class="when">jul 2026</span></div>
-      <span class="d">LeRobot's diffusion policy on PushT: evaluation harness, two silent bugs fixed, LoRA fine-tuning.</span></summary>
-    <div class="open">
-      <img src="https://raw.githubusercontent.com/HarishDeepak/Diffusion_Policy_Fine-Tuning_with_LoRA/master/rollout.gif" alt="PushT rollout" loading="lazy" style="max-width:260px">
-      <p class="res">Success rate <b>5/10 → 5/10</b> after LoRA. The interesting parts were a checkpoint that silently dropped its normalization and a data loader that ate more than 100&nbsp;GB of RAM.</p>
-      <div class="links"><a href="projects/diffusion-policy.html">case study →</a><a href="https://github.com/HarishDeepak/Diffusion_Policy_Fine-Tuning_with_LoRA">code →</a></div>
-    </div>
-  </details>
-
-  <details>
-    <summary><div class="row"><span class="t">Open-vocabulary aerial segmentation</span><span class="when">summer 2026</span></div>
-      <span class="d">Three text-prompted segmentation methods compared on ISPRS Potsdam, with Fraunhofer IGD.</span></summary>
-    <div class="open">
-      <p class="res">SegEarth-OV3 (SAM&nbsp;3) reached <b>70.6%</b> mIoU zero-shot on six tiles, against <b>64.4%</b> for RSKT-Seg with a sliding window. A prompt and threshold study on Hessen orthophotos followed.</p>
-    </div>
-  </details>
-
-  <details>
-    <summary><div class="row"><span class="t">Smaller things</span><span class="when"></span></div>
-      <span class="d">A cycling-safety map and an industrial data bridge.</span></summary>
-    <div class="open">
-      <p><a href="https://github.com/HarishDeepak/cyclist-painpoints">cyclist-painpoints →</a> fast, unprotected roads ranked from OpenStreetMap data, checked in QGIS.</p>
-      <p><a href="https://github.com/HarishDeepak/opcua-mqtt-bridge">opcua-mqtt-bridge →</a> OPC UA / Modbus to MQTT with store-and-forward, tested by killing the broker.</p>
-    </div>
-  </details>
-
   <h2 class="sec">// skills</h2>
-  <p class="lead">What I use on the robot and around it.</p>
   <div class="chips">
     <span>Python</span><span>C++</span><span>ROS 2</span><span>ROS Noetic</span><span>MoveIt 2</span><span>ros2_control</span>
     <span>Gazebo</span><span>CARLA</span><span>PyTorch</span><span>OpenCV</span><span>Open3D</span><span>Grounded-SAM-2</span>
@@ -147,8 +140,6 @@
       <div class="d">ROS 2 software team, since jun 2026</div></li>
     <li><span class="t">1st place, House of Developers Hackathon</span>
       <div class="d">GDSC VIT, data science track, 2022</div></li>
-    <li><span class="t"><a href="https://arxiv.org/abs/2405.17449">Image-based character recognition to decode temple inscriptions</a></span>
-      <div class="d">arXiv preprint, 2024</div></li>
   </ul>
 
   <h2 class="sec">// contact</h2>
