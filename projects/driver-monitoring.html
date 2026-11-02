@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Driver monitoring test bench — Harish Deepak</title>
+<meta name="description" content="A camera-based driver monitor tested against Euro NCAP SD-202 timing on real and synthetic drivers, with a CARLA escalation demo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Doto:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="page">
+  <a class="back" href="../">← harish deepak</a>
+
+  <div class="narrow">
+    <div class="case-head">
+      <div class="kicker">01 · personal project · october 2026</div>
+      <h1>Testing a driver monitor the way a car maker would</h1>
+      <p class="lede">New cars in Europe must watch the driver. Euro NCAP's rule is simple: eyes closed for 3&nbsp;s means
+        "asleep", and the warning has to come within 0.2&nbsp;s of that moment. I built a monitor from open tools and spent
+        most of the time on the part that usually gets skipped: checking that rule honestly.</p>
+      <dl class="facts">
+        <div><dt>Stack</dt><dd>MediaPipe, DINOv2, CLIP, CARLA, ROS 2</dd></div>
+        <div><dt>Data</dt><dd>6 sources, real + synthetic</dd></div>
+        <div><dt>Output</dt><dd>scored suite + PDF report</dd></div>
+        <div><dt>Code</dt><dd><a href="https://github.com/HarishDeepak/driver-attention-bench">driver-attention-bench</a></dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <figure class="shot">
+    <img src="https://raw.githubusercontent.com/HarishDeepak/driver-attention-bench/main/results/demo_live_phone.gif" alt="Live phone-camera test: eyes closed, looking down, head turned; warnings fire" loading="lazy">
+    <figcaption>Live phone camera. Green/red is the system's decision per frame, yellow is the truth, labelled by hand
+      without seeing the output. 4 of 4 warnings on time, 0 false alerts. One take, so a demo, not a statistic.</figcaption>
+  </figure>
+
+  <div class="narrow prose">
+    <h2>The pipeline</h2>
+    <p>MediaPipe face points give eyelid opening, head pose and gaze. Timers turn per-frame states into Euro NCAP SD-202
+      warnings: microsleep (1.5&nbsp;s), sleep (3&nbsp;s), distraction (3&nbsp;s). A harness then scores every warning against
+      labelled truth (±0.2&nbsp;s, Wilson confidence intervals, false alerts per hour) and writes a PDF report. The same
+      warnings drive a car in CARLA and are published as ROS&nbsp;2 topics.</p>
+
+    <h2>What the numbers said</h2>
+    <table class="numbers">
+      <tr><th>Test</th><th>Result</th></tr>
+      <tr><td>Synthetic drivers (Blender), exact labels</td><td class="v">15/18 on time, 0 false alerts</td></tr>
+      <tr><td>Real drivers (DMD), first run</td><td class="v">7/66 on time</td></tr>
+      <tr><td>Same detector, test setup fixed</td><td class="v">22/49 (95% CI 0.32–0.59)</td></tr>
+      <tr><td>DINOv2 / CLIP probes vs eyelid ratio, per frame</td><td class="v">≈97%, no better</td></tr>
+      <tr><td>Hosted vision-language models</td><td class="v">near chance, 3–9 s/frame</td></tr>
+      <tr><td>Night drivers, robust calibration</td><td class="v">7 → 10 of 27</td></tr>
+    </table>
+    <p>The biggest jump on real drivers came from the test, not the detector: scoring only where labels exist, a longer
+      calibration, and counting "closed" only when the lids are actually shut, which is what SD-202 times.</p>
+
+    <div class="honest">
+      <h3>What didn't work</h3>
+      <p>Even after the fixes, 27 of 49 real events are still missed or late, at 19 false alerts per hour. This is far from a
+        product.</p>
+      <p>The drowsiness level fired on 0 of 6 alert videos, but caught only 2 of 6 self-rated drowsy ones. It detects
+        repeated microsleeps, not early, quiet drowsiness.</p>
+      <p>Small datasets throughout: 6 DMD drivers, 2 hand-labelled night videos, simplified car physics.</p>
+    </div>
+
+    <h2>What a warning is worth on the road</h2>
+    <p>In CARLA, a driver who stays asleep gets warning → slow-down → a minimal-risk manoeuvre: hazards, move right if the
+      lane is free, stop at the edge. Plugging the measured accuracy into a Monte Carlo at 50&nbsp;km/h, the crash rate for an
+      inattentive driver falls from 87% with no camera to 44% with the measured eye-closure detector, against 17% for a
+      perfect one.</p>
+  </div>
+
+  <div class="pair shot">
+    <img src="https://raw.githubusercontent.com/HarishDeepak/driver-attention-bench/main/results/demo_carla_safe_stop.gif" alt="CARLA: slowing, lane change right, stop at the lane edge" loading="lazy">
+    <img src="https://raw.githubusercontent.com/HarishDeepak/driver-attention-bench/main/results/dms_safety_mc.png" alt="Crash probability vs speed for no monitor, measured monitor and ideal monitor" loading="lazy">
+  </div>
+
+  <div class="narrow prose">
+    <h2>Next</h2>
+    <ul>
+      <li>Earlier drowsiness cues (blink rate and speed), tuned on data rated over time.</li>
+      <li>A real infrared camera and more people.</li>
+      <li>A lead car in the CARLA scene, so the earlier collision warning shows up in the loop.</li>
+    </ul>
+  </div>
+
+  <div class="next"><a href="../">← all work</a><a href="pragmabot-fr3.html">next: PragmaBot on an FR3 →</a></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diffusion policy with LoRA — Harish Deepak</title>
+<meta name="description" content="LeRobot diffusion policy on PushT: evaluation harness, two silent bugs fixed, LoRA fine-tuning, and an honest unchanged result.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Doto:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="page">
+  <a class="back" href="../">← harish deepak</a>
+
+  <div class="narrow">
+    <div class="case-head">
+      <div class="kicker">04 · personal project · july 2026</div>
+      <h1>Fine-tuning a diffusion policy, and reporting that it didn't help</h1>
+      <p class="lede">A pretrained 251.8M-parameter visuomotor diffusion policy from LeRobot, run closed-loop on PushT. It sees a
+        camera image and the end-effector position and outputs the next target, the same interface real manipulation
+        policies use. Most of the work turned out to be finding two bugs that fail silently.</p>
+      <dl class="facts">
+        <div><dt>Model</dt><dd>LeRobot Diffusion Policy</dd></div>
+        <div><dt>Task</dt><dd>PushT (gym_pusht)</dd></div>
+        <div><dt>Method</dt><dd>LoRA rank 8, peft</dd></div>
+        <div><dt>Code</dt><dd><a href="https://github.com/HarishDeepak/Diffusion_Policy_Fine-Tuning_with_LoRA">repo</a></dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <figure class="shot" style="max-width:420px">
+    <img src="https://raw.githubusercontent.com/HarishDeepak/Diffusion_Policy_Fine-Tuning_with_LoRA/master/rollout.gif" alt="A successful PushT rollout" loading="lazy">
+    <figcaption>One successful rollout, for illustration.</figcaption>
+  </figure>
+
+  <div class="narrow prose">
+    <h2>Bug 1: right shape, wrong by orders of magnitude</h2>
+    <p>The published checkpoint stores its normalization statistics in submodules the current LeRobot release no longer
+      defines. Loading it prints one warning, drops the statistics and keeps running, so the actions look plausible and are
+      numerically wrong. The fix reads the statistics straight from the safetensors file and applies them by hand, following
+      the checkpoint's own config.</p>
+
+    <h2>Bug 2: more than 100&nbsp;GB of RAM</h2>
+    <p>With a shuffled DataLoader on the video-backed dataset, every sample seeks into a different video file, and PyAV's
+      decoder resources pile up instead of being freed. Sequential loading avoided the leak but left the loss flat. Decoding
+      all frames into memory once, then shuffling tensors, fixed both.</p>
+
+    <h2>The result</h2>
+    <table class="numbers">
+      <tr><th></th><th>Baseline</th><th>LoRA (60 episodes)</th></tr>
+      <tr><td>Success, 10 fixed seeds</td><td class="v">5/10</td><td class="v">5/10</td></tr>
+      <tr><td>Trainable parameters</td><td class="v">—</td><td class="v">254k (0.10%)</td></tr>
+      <tr><td>Training loss, first → last 10 steps</td><td class="v">—</td><td class="v">0.0189 → 0.0138</td></tr>
+    </table>
+
+    <div class="honest">
+      <h3>What didn't work</h3>
+      <p>The success rate didn't move. Three seeds flipped from fail to success and two the other way. The base model had
+        already seen all 206 PushT episodes, so a 60-episode subset of the same data had little to add.</p>
+      <p>What the project does show: adapters on exactly the intended FiLM layers, a loss that goes down once the data pipeline
+        is fixed, and a clean save, merge and reload. The obvious next test is fine-tuning on data aimed at the seeds that
+        still fail.</p>
+    </div>
+  </div>
+
+  <div class="next"><a href="cube-stacking.html">← cube stacking</a><a href="../">all work →</a></div>
+</main>
+</body>
+</html>

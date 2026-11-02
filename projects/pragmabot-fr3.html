@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PragmaBot on a Franka FR3 — Harish Deepak</title>
+<meta name="description" content="PragmaBot (IEEE RA-L 2026) reproduced on a real Franka FR3: perception, grasp synthesis and a ROS 2 execution layer for a VLM planner with memory.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Doto:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="page">
+  <a class="back" href="../">← harish deepak</a>
+
+  <div class="narrow">
+    <div class="case-head">
+      <div class="kicker">02 · PEARL Lab, TU Darmstadt · apr – sep 2026</div>
+      <h1>A robot that learns from its own mistakes, without retraining</h1>
+      <p class="lede">PragmaBot (Qu et al., IEEE RA-L 2026) keeps a vision-language model frozen and changes only its context:
+        the robot writes critiques of its own failures into memory and reads them back next time. The published code stops
+        at planning and leaves execution as <code>NotImplementedError</code>. This project put it on a real Franka FR3.</p>
+      <dl class="facts">
+        <div><dt>Robot</dt><dd>Franka FR3, ZED 2 stereo</dd></div>
+        <div><dt>Stack</dt><dd>ROS 2 Humble, MoveIt 2</dd></div>
+        <div><dt>Perception</dt><dd>Grounded-SAM-2, GraspGen</dd></div>
+        <div><dt>Code</dt><dd><a href="https://github.com/HarishDeepak/irm2pragmabot">irm2pragmabot</a></dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <figure class="shot">
+    <svg viewBox="0 0 1000 220" role="img" aria-label="Pipeline: camera to segmentation to point cloud to grasps to MoveIt 2 to success check to memory" style="width:100%;height:auto;border:1px solid var(--rule);border-radius:4px;background:var(--card)">
+      <g font-family="IBM Plex Mono, monospace" font-size="14" fill="currentColor" text-anchor="middle">
+        <g stroke="var(--rule)" stroke-width="1.5" fill="none">
+          <rect x="20" y="60" width="130" height="60" rx="4"/><rect x="180" y="60" width="150" height="60" rx="4"/>
+          <rect x="360" y="60" width="130" height="60" rx="4"/><rect x="520" y="60" width="130" height="60" rx="4"/>
+          <rect x="680" y="60" width="130" height="60" rx="4"/><rect x="840" y="60" width="140" height="60" rx="4"/>
+        </g>
+        <g stroke="var(--signal)" stroke-width="2"><path d="M150 90h30M330 90h30M490 90h30M650 90h30M810 90h30"/>
+          <path d="M910 120 v50 H85 v-50" fill="none" stroke-dasharray="5 5"/></g>
+        <text x="85" y="95">ZED 2</text>
+        <text x="255" y="87">Grounded-</text><text x="255" y="105">SAM-2 mask</text>
+        <text x="425" y="87">mask + depth</text><text x="425" y="105">→ cloud</text>
+        <text x="585" y="87">GraspGen</text><text x="585" y="105">6-DoF grasps</text>
+        <text x="745" y="87">MoveIt 2</text><text x="745" y="105">pick/place/push</text>
+        <text x="910" y="87">VLM checks</text><text x="910" y="105">before/after</text>
+        <text x="500" y="200" fill="var(--muted)" font-size="13">failure critique → short-term memory · finished task → long-term memory (RAG)</text>
+        <text x="500" y="38" fill="var(--muted)" font-size="13">the half the paper leaves unimplemented</text>
+      </g>
+    </svg>
+  </figure>
+
+  <div class="narrow prose">
+    <h2>The execution layer</h2>
+    <p>A ROS&nbsp;2 bridge exposes three skills to the planner (pick, place and push), one action call each. They are driven by
+      MoveIt&nbsp;2 free-space planning plus Cartesian approach, lift and push strokes, with joint-velocity checks and a table
+      collision scene. Every skill returns a success flag and a failure message, and that message is exactly what the planner
+      reflects on.</p>
+
+    <h2>The bug that was really a depth problem</h2>
+    <p>Grasps kept landing in the air beside objects. The cause was stereo "flying pixels" at object edges, which stretched the
+      reconstructed object far behind itself. Mask erosion, a median-absolute-deviation depth filter and a scale-aware crop
+      fixed it:</p>
+    <table class="numbers">
+      <tr><th>Measure</th><th>Before</th><th>After</th></tr>
+      <tr><td>Object depth extent, scene 1</td><td class="v">17.7 cm</td><td class="v">7.3 cm</td></tr>
+      <tr><td>Object depth extent, scene 2</td><td class="v">16.7 cm</td><td class="v">4.5 cm</td></tr>
+      <tr><td>GraspGen's own confidence</td><td class="v">0.77–0.95</td><td class="v">0.94–0.98</td></tr>
+    </table>
+    <p>After ArUco hand-eye calibration (easy_handeye2), the arm reached commanded poses with about 1&nbsp;mm error.</p>
+
+    <h2>Did the memory effects reproduce?</h2>
+    <table class="numbers">
+      <tr><th>Condition</th><th>Result</th></tr>
+      <tr><td>Short-term memory: recover from a failed plan (unstack a blocking cube; switch to a tool when a push fails)</td><td class="v">3/5 runs</td></tr>
+      <tr><td>Long + short-term memory: reuse lessons in new scenes, first try</td><td class="v">4/5 and 5/5</td></tr>
+      <tr><td>Retrieval ablation, first-action accuracy (8 tasks × 3 settings × 5)</td><td class="v">RAG top-5 92.5% vs full memory 87.5%</td></tr>
+    </table>
+    <p>One run picked up a sponge to push an object too small to grip, a tool use that came from a stored lesson rather than
+      a rule. The full-memory setting also needed 1.9× the prompt tokens of retrieval.</p>
+
+    <div class="honest">
+      <h3>Read these numbers carefully</h3>
+      <p>Five human-judged runs per condition. That shows the effect exists on this robot; it is not a statistical result.</p>
+      <p>GraspGen's confidence is the model's own score, not a measured grasp success rate.</p>
+      <p>The planner, memory and retrieval are upstream PragmaBot, kept as-is apart from the FR3 prompts. The paper's
+        image-annotation module was not reimplemented, and push moves a fixed 12&nbsp;cm.</p>
+    </div>
+  </div>
+
+  <div class="next"><a href="driver-monitoring.html">← driver monitoring</a><a href="cube-stacking.html">next: cube stacking →</a></div>
+</main>
+</body>
+</html>

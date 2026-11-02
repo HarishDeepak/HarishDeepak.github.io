@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cube stacking and the ROS 2 port — Harish Deepak</title>
+<meta name="description" content="Vision-based cube stacking on a real Franka Panda with ROS Noetic and MoveIt, then ported to ROS 2 Humble.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Doto:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="page">
+  <a class="back" href="../">← harish deepak</a>
+
+  <div class="narrow">
+    <div class="case-head">
+      <div class="kicker">03 · PEARL Lab, TU Darmstadt · oct 2025 – mar 2026, port 2026</div>
+      <h1>Six cubes, one tower, a real Panda</h1>
+      <p class="lede">A Franka Panda finds wooden cubes on a table, picks them one by one and stacks them into a tower. It was
+        built in Gazebo first, then run on the physical robot. Afterwards the whole stack moved from ROS Noetic to ROS&nbsp;2 Humble.</p>
+      <dl class="facts">
+        <div><dt>Robot</dt><dd>Franka Panda, ZED2i</dd></div>
+        <div><dt>Stack</dt><dd>ROS Noetic, MoveIt, TRAC-IK</dd></div>
+        <div><dt>Perception</dt><dd>GroundingDINO + SAM, Open3D</dd></div>
+        <div><dt>Code</dt><dd><a href="https://github.com/HarishDeepak/irobman_project">irobman_project</a></dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <figure class="shot">
+    <img src="https://raw.githubusercontent.com/HarishDeepak/irobman_project/main/media/stacking_demo.gif" alt="The robot stacking six cubes, 8x speed" loading="lazy">
+    <figcaption>Six cubes, 8× speed, real robot.</figcaption>
+  </figure>
+
+  <div class="narrow prose">
+    <h2>Perception: from a word to a pose</h2>
+    <p>The default pipeline prompts GroundingDINO with the word "cube", segments with SAM, back-projects the masks into the
+      ZED point cloud and fits a cube to each cluster with ICP, using the table plane as a constraint. A classic mode
+      (filtering, DBSCAN, ICP) stays as a fallback. Fusing a few frames before fitting made the poses steadier, and anything
+      outside a safe area on the table is ignored.</p>
+
+    <h2>Motion: one snapshot, then commit</h2>
+    <p>The stacker takes a single snapshot of cube poses, picks a tower spot near the base, and always takes the cube
+      furthest from the base next. Each pick goes approach-from-above, align, grasp, attach to the MoveIt scene, carry, release.
+      The placed cube is then added back to the scene as an obstacle, so later moves plan around the tower.</p>
+  </div>
+
+  <div class="pair shot">
+    <img src="https://raw.githubusercontent.com/HarishDeepak/irobman_project/main/media/stacked_cubes_2.jpg" alt="Side view of the finished tower" loading="lazy">
+    <img src="https://raw.githubusercontent.com/HarishDeepak/irobman_project/main/media/rviz_visualization.gif" alt="Cube poses visualised in RViz" loading="lazy">
+  </div>
+
+  <div class="narrow prose">
+    <h2>The ROS&nbsp;2 port</h2>
+    <p>Moving to ROS&nbsp;2 Humble meant a new control layer: the Panda URDF got a <code>ros2_control</code> block and the
+      <code>gazebo_ros2_control</code> plugin, a joint trajectory controller replaced the old one, and MoveIt&nbsp;2 took over
+      planning, all in Docker on Ubuntu 22.04. Seven problems along the way (URDF constraints, controller-manager timing,
+      plugin load order) are written up in the <a href="https://github.com/HarishDeepak/IRM-ROS2-Port">repo</a> with their fixes.</p>
+
+    <div class="honest">
+      <h3>Where the port stands</h3>
+      <p>Simulation, control and MoveIt&nbsp;2 planning run in ROS&nbsp;2. The perception and stacking nodes are ported but not
+        yet wired together, so the ROS&nbsp;2 version does not stack cubes end to end yet.</p>
+    </div>
+  </div>
+
+  <div class="next"><a href="pragmabot-fr3.html">← PragmaBot</a><a href="diffusion-policy.html">next: diffusion policy →</a></div>
+</main>
+</body>
+</html>

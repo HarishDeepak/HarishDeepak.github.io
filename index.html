@@ -3,238 +3,165 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Harish Deepak — Robotics & AI</title>
-<meta name="description" content="Portfolio of Harish Deepak — M.Sc. student at TU Darmstadt, robotics perception & manipulation.">
-<style>
-  :root {
-    --bg: #ffffff;
-    --fg: #1a1a1a;
-    --muted: #5c5c5c;
-    --border: #e3e3e3;
-    --accent: #1f2937;
-    --chip-bg: #f3f4f6;
-    --link: #1d4ed8;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f1115;
-      --fg: #e8e8e8;
-      --muted: #9a9a9a;
-      --border: #2a2d34;
-      --accent: #cbd5e1;
-      --chip-bg: #1c1f26;
-      --link: #7aa2f7;
-    }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--fg);
-    line-height: 1.55;
-  }
-  main {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 3.5rem 1.5rem 4rem;
-  }
-  header h1 {
-    font-size: 1.9rem;
-    margin: 0 0 0.25rem;
-  }
-  header p.role {
-    color: var(--muted);
-    font-size: 1.05rem;
-    margin: 0 0 1rem;
-  }
-  header p.intro {
-    max-width: 60ch;
-  }
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 1rem;
-    margin: 1.2rem 0 0;
-    font-size: 0.92rem;
-  }
-  .links a {
-    color: var(--link);
-    text-decoration: none;
-  }
-  .links a:hover { text-decoration: underline; }
-  section {
-    margin-top: 2.75rem;
-  }
-  h2 {
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.25rem;
-  }
-  .highlights {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 0.5rem;
-  }
-  .highlights li {
-    padding-left: 1.3rem;
-    position: relative;
-  }
-  .highlights li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--muted);
-  }
-  .skills {
-    display: grid;
-    gap: 0.6rem;
-    font-size: 0.92rem;
-  }
-  .skills .row {
-    display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 0.75rem;
-  }
-  .skills .cat {
-    color: var(--muted);
-    font-weight: 600;
-  }
-  .projects {
-    display: grid;
-    gap: 1.5rem;
-  }
-  .project {
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.1rem 1.25rem;
-  }
-  .project h3 {
-    margin: 0 0 0.35rem;
-    font-size: 1.02rem;
-  }
-  .project h3 a {
-    color: var(--fg);
-    text-decoration: none;
-  }
-  .project h3 a:hover { color: var(--link); }
-  .project .tagline {
-    color: var(--muted);
-    font-size: 0.88rem;
-    margin: 0 0 0.6rem;
-  }
-  .project p.desc {
-    margin: 0;
-    font-size: 0.94rem;
-  }
-  .project .repo-link {
-    display: inline-block;
-    margin-top: 0.6rem;
-    font-size: 0.85rem;
-  }
-  .publication {
-    font-size: 0.94rem;
-  }
-  footer {
-    margin-top: 3.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-</style>
+<title>Harish Deepak</title>
+<meta name="description" content="Harish Deepak, M.Sc. student at TU Darmstadt. Robot perception and manipulation on real Franka arms.">
+<meta property="og:title" content="Harish Deepak">
+<meta property="og:description" content="Robot perception and manipulation on real Franka arms, with the numbers that didn't go up too.">
+<meta property="og:image" content="https://raw.githubusercontent.com/HarishDeepak/irobman_project/main/media/stacked_cubes_1.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f3eee3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2326231e'/%3E%3Cpath d='M4 3h2v4h4V3h2v10h-2V9H6v4H4z' fill='%23f3eee3'/%3E%3Ccircle cx='13' cy='3' r='1.6' fill='%231f6b5e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Doto:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
+<main class="page">
+  <h1 class="name">Harish Deepak</h1>
+  <p class="role">robot perception &amp; manipulation · m.sc. @ tu darmstadt</p>
 
-<header>
-  <h1>Harish Deepak</h1>
-  <p class="role">M.Sc. Information &amp; Communication Engineering, TU Darmstadt · Robotics perception &amp; manipulation</p>
-  <p class="intro">I build robots that can see, understand, and act. Currently at PEARL Lab working on vision-based manipulation with a real Franka Panda arm — and building toward humanoid robotics.</p>
-  <div class="links">
-    <a href="mailto:harish.deepak@stud.tu-darmstadt.de">harish.deepak@stud.tu-darmstadt.de</a>
-    <a href="https://linkedin.com/in/harish-deepak">LinkedIn</a>
-    <a href="https://github.com/HarishDeepak">GitHub</a>
+  <div class="intro">
+    <p>hey, i'm harish. i work on robot arms that have to find an object, plan a grasp and actually pick it up, mostly on
+      real Franka robots with ROS 2 and MoveIt 2.</p>
+    <p>i like the testing part as much as the demo, so the results below include the ones that didn't go up.</p>
   </div>
-</header>
 
-<section>
-  <h2>Now</h2>
-  <ul class="highlights">
-    <li>VLM-based memory for robot task planning (ROS2, real Franka Panda) — PEARL Lab, TU Darmstadt</li>
-    <li>Recently: solo migration of a full manipulation stack from ROS1 to ROS2 Humble</li>
-    <li>Selected from 450 applicants for the RIMA Summer School on walking robots — FZI Karlsruhe, Aug 2026</li>
-    <li>Learning: humanoid/legged robotics, VLA models, C++ for robotics</li>
+  <h2 class="sec">$ now <small>nov 2026</small></h2>
+  <ul class="items">
+    <li><span class="t">Starting as a student research assistant at PEARL Lab</span>
+      <div class="d">robot learning in simulation, TU Darmstadt</div></li>
+    <li><span class="t">ROS 2 software for DARE Robotics' ARES robot</span>
+      <div class="d">student team, Darmstadt</div></li>
+    <li><span class="t">Hackathons: ROBOTICS X AI HackLab (Berlin) and Arctic Express (Espoo)</span>
+      <div class="d">nov – dec 2026 · always up for joining a robotics team</div></li>
   </ul>
-</section>
 
-<section>
-  <h2>Tech Stack</h2>
-  <div class="skills">
-    <div class="row"><span class="cat">Robotics</span><span>ROS1 (Noetic), ROS2 (Humble), ros2_control, MoveIt / MoveIt2, TRAC-IK, Gazebo, RViz, Open3D</span></div>
-    <div class="row"><span class="cat">Languages</span><span>Python, C++, Embedded C, MATLAB, SQL</span></div>
-    <div class="row"><span class="cat">ML &amp; Vision</span><span>PyTorch, TensorFlow, OpenCV, SAM2, FoundationPose, CLIP, DINOv2, LoRA/PEFT, ViT</span></div>
-    <div class="row"><span class="cat">Tools</span><span>Git, Linux, Docker, colcon</span></div>
+  <h2 class="sec">$ experience <small>labs &amp; internships</small></h2>
+  <ul class="timeline">
+    <li class="now">
+      <div class="row"><b>Student Research Assistant (HiWi)</b><span class="when">starting now</span></div>
+      <i>PEARL Lab, TU Darmstadt</i>
+    </li>
+    <li>
+      <div class="row"><b>Robot Manipulation Project Lab II</b><span class="when">apr 2026 – sep 2026</span></div>
+      <i>PEARL Lab, TU Darmstadt</i>
+      <span class="note">PragmaBot on a Franka FR3</span>
+    </li>
+    <li>
+      <div class="row"><b>Visual Computing Praktikum</b><span class="when">summer 2026</span></div>
+      <i>with Fraunhofer IGD</i>
+      <span class="note">open-vocabulary segmentation of aerial images</span>
+    </li>
+    <li>
+      <div class="row"><b>Robot Manipulation Project Lab I</b><span class="when">oct 2025 – mar 2026</span></div>
+      <i>PEARL Lab, TU Darmstadt</i>
+      <span class="note">vision-based cube stacking on a Franka Panda</span>
+    </li>
+    <li>
+      <div class="row"><b>Data Science Intern</b><span class="when">apr 2023 – oct 2023</span></div>
+      <i>Experiences Digital, India</i>
+      <span class="note">7 months</span>
+    </li>
+  </ul>
+
+  <h2 class="sec">$ education</h2>
+  <ul class="items">
+    <li><div class="row"><span class="t">TU Darmstadt</span><span class="when">2024 – now</span></div>
+      <div class="d">M.Sc. Information &amp; Communication Engineering</div></li>
+    <li><div class="row"><span class="t">VIT University, Vellore</span><span class="when">2020 – 2024</span></div>
+      <div class="d">B.Tech Electronics &amp; Communication Engineering</div></li>
+  </ul>
+
+  <h2 class="sec">$ projects <small>click to open</small></h2>
+
+  <details>
+    <summary><div class="row"><span class="t">Driver monitoring test bench</span><span class="when">oct 2026</span></div>
+      <span class="d">A camera-based driver monitor, tested against Euro NCAP's warning-timing rules and wired into CARLA.</span></summary>
+    <div class="open">
+      <img src="https://raw.githubusercontent.com/HarishDeepak/driver-attention-bench/main/results/demo_live_phone.gif" alt="Live phone-camera test with warnings firing" loading="lazy">
+      <p class="res">on-time warnings on real drivers went from <b>7/66</b> to <b>22/49</b>, mostly by fixing the test rather than the detector. Foundation models (DINOv2, CLIP) matched a simple eyelid measure but didn't beat it.</p>
+      <div class="links"><a href="projects/driver-monitoring.html">case study →</a><a href="https://github.com/HarishDeepak/driver-attention-bench">code →</a></div>
+    </div>
+  </details>
+
+  <details>
+    <summary><div class="row"><span class="t">PragmaBot on a Franka FR3</span><span class="when">2026</span></div>
+      <span class="d">A frozen vision-language model that plans, checks its work and learns from failures through memory, on a real arm.</span></summary>
+    <div class="open">
+      <p class="res">The paper's code stops at planning; this added segmentation, grasp synthesis and a ROS&nbsp;2 skill layer.
+        Stereo depth artefacts cut from <b>17.7</b> to <b>7.3 cm</b>; with short-term memory the robot recovered from a failed plan in <b>3/5</b> runs.</p>
+      <div class="links"><a href="projects/pragmabot-fr3.html">case study →</a><a href="https://github.com/HarishDeepak/irm2pragmabot">code →</a></div>
+    </div>
+  </details>
+
+  <details>
+    <summary><div class="row"><span class="t">Cube stacking on a Franka Panda, then ROS&nbsp;2</span><span class="when">2025 – 26</span></div>
+      <span class="d">Text-prompted segmentation, cubes fitted in 3D, MoveIt stacks a six-cube tower. Later ported to ROS 2 Humble.</span></summary>
+    <div class="open">
+      <img src="https://raw.githubusercontent.com/HarishDeepak/irobman_project/main/media/stacking_demo.gif" alt="The robot stacking six cubes" loading="lazy">
+      <p class="res">Six-cube tower on the real robot. The ROS&nbsp;2 port runs simulation, control and planning; perception and stacking are ported but not wired together yet.</p>
+      <div class="links"><a href="projects/cube-stacking.html">case study →</a><a href="https://github.com/HarishDeepak/irobman_project">code →</a><a href="https://github.com/HarishDeepak/IRM-ROS2-Port">ros 2 port →</a></div>
+    </div>
+  </details>
+
+  <details>
+    <summary><div class="row"><span class="t">Diffusion policy + LoRA</span><span class="when">jul 2026</span></div>
+      <span class="d">LeRobot's diffusion policy on PushT: evaluation harness, two silent bugs fixed, LoRA fine-tuning.</span></summary>
+    <div class="open">
+      <img src="https://raw.githubusercontent.com/HarishDeepak/Diffusion_Policy_Fine-Tuning_with_LoRA/master/rollout.gif" alt="PushT rollout" loading="lazy" style="max-width:260px">
+      <p class="res">Success rate <b>5/10 → 5/10</b> after LoRA. The interesting parts were a checkpoint that silently dropped its normalization and a data loader that ate more than 100&nbsp;GB of RAM.</p>
+      <div class="links"><a href="projects/diffusion-policy.html">case study →</a><a href="https://github.com/HarishDeepak/Diffusion_Policy_Fine-Tuning_with_LoRA">code →</a></div>
+    </div>
+  </details>
+
+  <details>
+    <summary><div class="row"><span class="t">Open-vocabulary aerial segmentation</span><span class="when">summer 2026</span></div>
+      <span class="d">Three text-prompted segmentation methods compared on ISPRS Potsdam, with Fraunhofer IGD.</span></summary>
+    <div class="open">
+      <p class="res">SegEarth-OV3 (SAM&nbsp;3) reached <b>70.6%</b> mIoU zero-shot on six tiles, against <b>64.4%</b> for RSKT-Seg with a sliding window. A prompt and threshold study on Hessen orthophotos followed.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><div class="row"><span class="t">Smaller things</span><span class="when"></span></div>
+      <span class="d">A cycling-safety map and an industrial data bridge.</span></summary>
+    <div class="open">
+      <p><a href="https://github.com/HarishDeepak/cyclist-painpoints">cyclist-painpoints →</a> fast, unprotected roads ranked from OpenStreetMap data, checked in QGIS.</p>
+      <p><a href="https://github.com/HarishDeepak/opcua-mqtt-bridge">opcua-mqtt-bridge →</a> OPC UA / Modbus to MQTT with store-and-forward, tested by killing the broker.</p>
+    </div>
+  </details>
+
+  <h2 class="sec">$ skills</h2>
+  <p class="lead">what i reach for on the robot and around it.</p>
+  <div class="chips">
+    <span>Python</span><span>C++</span><span>ROS 2</span><span>ROS Noetic</span><span>MoveIt 2</span><span>ros2_control</span>
+    <span>Gazebo</span><span>CARLA</span><span>PyTorch</span><span>OpenCV</span><span>Open3D</span><span>Grounded-SAM-2</span>
+    <span>DINOv2</span><span>CLIP</span><span>LoRA / PEFT</span><span>MediaPipe</span><span>Docker</span><span>Linux</span><span>Git</span>
   </div>
-</section>
 
-<section>
-  <h2>Featured Projects</h2>
-  <div class="projects">
+  <h2 class="sec">$ also</h2>
+  <ul class="items">
+    <li><span class="t">RIMA Summer School on walking robots</span>
+      <div class="d">FZI Karlsruhe, aug 2026 · behaviour trees, navigation and perception on Spot and Go2 in simulation</div></li>
+    <li><span class="t">DARE Robotics Darmstadt</span>
+      <div class="d">ROS 2 software team, since jun 2026</div></li>
+    <li><span class="t">1st place, House of Developers Hackathon</span>
+      <div class="d">GDSC VIT, data science track, 2022</div></li>
+    <li><span class="t"><a href="https://arxiv.org/abs/2405.17449">Image-based character recognition to decode temple inscriptions</a></span>
+      <div class="d">arXiv preprint, 2024</div></li>
+  </ul>
 
-    <div class="project">
-      <h3><a href="https://github.com/HarishDeepak/IRM-ROS2-Port">IRM-ROS2-Port</a></h3>
-      <p class="tagline">ROS1 → ROS2 Humble migration of a Franka Panda manipulation pipeline</p>
-      <p class="desc">Solo migration in Docker; resolved 7 hard integration issues (URDF constraints, controller-manager timing, plugin ordering). Tuned JointTrajectoryController + MoveIt2 planning.</p>
-      <a class="repo-link" href="https://github.com/HarishDeepak/IRM-ROS2-Port">View repo →</a>
-    </div>
-
-    <div class="project">
-      <h3><a href="https://github.com/HarishDeepak/irobman_project">irobman_project</a></h3>
-      <p class="tagline">Sim-to-Real Vision-Based Manipulation (PEARL Lab)</p>
-      <p class="desc">Closed-loop grasp-and-stack on a real 7-DoF Franka Panda. SAM2 + FoundationPose for 6D pose, an FSM for task orchestration, MoveIt + TRAC-IK for motion planning. Validated in Gazebo, transferred to hardware.</p>
-      <a class="repo-link" href="https://github.com/HarishDeepak/irobman_project">View repo →</a>
-    </div>
-
-    <div class="project">
-      <h3><a href="https://github.com/HarishDeepak/Diffusion_Policy_Fine-Tuning_with_LoRA">Diffusion_Policy_Fine-Tuning_with_LoRA</a></h3>
-      <p class="tagline">LeRobot Diffusion Policy evaluation + LoRA fine-tuning</p>
-      <p class="desc">Ran a pretrained visuomotor policy on PushT, fixed a normalization bug and a &gt;100GB pipeline memory leak, built a 10-seed quantified eval harness, fine-tuned LoRA adapters.</p>
-      <a class="repo-link" href="https://github.com/HarishDeepak/Diffusion_Policy_Fine-Tuning_with_LoRA">View repo →</a>
-    </div>
-
-    <div class="project">
-      <h3><a href="https://github.com/HarishDeepak/VC">RG-GeoPrompt-PEFT</a></h3>
-      <p class="tagline">Open-vocabulary remote-sensing segmentation via PEFT</p>
-      <p class="desc">Parameter-efficient (1.35% trainable) DINOv2+LoRA + CLIP model; 84.9% mIoU on ISPRS Potsdam with zero-shot transfer to unlabeled Darmstadt aerial imagery.</p>
-      <a class="repo-link" href="https://github.com/HarishDeepak/VC">View repo →</a>
-    </div>
-
-    <div class="project">
-      <h3><a href="https://github.com/HarishDeepak/cyclist-painpoints">cyclist-painpoints</a></h3>
-      <p class="tagline">Cycling infrastructure gap analysis</p>
-      <p class="desc">Python/OSMnx/GeoPandas pipeline flagging roads lacking cycling infrastructure, ranked by a rule-based score, validated in QGIS.</p>
-      <a class="repo-link" href="https://github.com/HarishDeepak/cyclist-painpoints">View repo →</a>
-    </div>
-
+  <h2 class="sec">$ contact</h2>
+  <p class="lead">darmstadt, germany · english (professional), german (b1)</p>
+  <div class="chips">
+    <a href="mailto:harish.deepak.c@gmail.com">harish.deepak.c@gmail.com</a>
+    <a href="mailto:harish.deepak@stud.tu-darmstadt.de">harish.deepak@stud.tu-darmstadt.de</a>
+    <a href="https://github.com/HarishDeepak">GitHub</a>
+    <a href="https://linkedin.com/in/harish-deepak">LinkedIn</a>
   </div>
-</section>
 
-<section>
-  <h2>Publication</h2>
-  <p class="publication">Image-based character recognition to decode temple inscriptions — <em>arXiv preprint, 2024</em> · <a href="https://arxiv.org/abs/2405.17449">arxiv.org/abs/2405.17449</a></p>
-</section>
-
-<footer>
-  Darmstadt, Germany · <a href="mailto:harish.deepak@stud.tu-darmstadt.de">harish.deepak@stud.tu-darmstadt.de</a>
-</footer>
-
+  <footer>© 2026 Harish Deepak · plain html &amp; css</footer>
 </main>
 </body>
 </html>
